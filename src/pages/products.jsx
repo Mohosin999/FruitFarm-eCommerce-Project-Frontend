@@ -1,30 +1,42 @@
 import React from "react";
 import axios from "axios";
+import Link from "next/link";
+import ImageComponent from "@/components/navbar/image/Image";
 
 const Products = ({ products }) => {
   return (
     <div className="container mx-auto px-5">
-      <section className="text-gray-400 bg-gray-900 body-font">
+      <section className="text-gray-400 bg-gray-900 body-font mb-5">
         <div className="container px-5 py-5 mx-auto">
           <div className="flex flex-wrap -m-4">
-            <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <a className="block relative h-48 rounded overflow-hidden">
-                <img
-                  alt="ecommerce"
-                  className="object-cover object-center w-full h-full block"
-                  src="https://dummyimage.com/420x260"
-                />
-              </a>
-              <div className="mt-4">
-                <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
-                  {products.data[0].attributes.category}
-                </h3>
-                <h2 className="text-white title-font text-lg font-medium">
-                  {products.data[1].attributes.title}
-                </h2>
-                <p className="mt-1">{products.data[0].attributes.price}$</p>
-              </div>
-            </div>
+            {products.data.map((item) => {
+              return (
+                <div key={item.id} className="lg:w-1/4 md:w-1/2 p-4 w-full">
+                  <Link
+                    href="/product"
+                    className="block relative h-48 rounded overflow-hidden"
+                  >
+                    <ImageComponent
+                      item={item.attributes.image.data.attributes.url}
+                    />
+                    {/* <img
+                      className="object-cover object-center w-full h-full block"
+                      src={item.attributes.image.data.attributes.url}
+                      alt="ecommerce"
+                    /> */}
+                  </Link>
+                  <div className="mt-4">
+                    <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
+                      {item.attributes.category}
+                    </h3>
+                    <h2 className="text-white title-font text-lg font-medium">
+                      {item.attributes.title}
+                    </h2>
+                    <p className="mt-1">{item.attributes.price}$</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
