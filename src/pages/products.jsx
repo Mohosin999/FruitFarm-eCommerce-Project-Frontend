@@ -6,33 +6,31 @@ import ImageComponent from "@/components/navbar/image/Image";
 const Products = ({ products }) => {
   return (
     <div className="container mx-auto px-5">
-      <section className="text-gray-400 bg-gray-900 body-font mb-5">
+      <section className="text-gray-400 bg-green-900 body-font mb-5">
         <div className="container px-5 py-5 mx-auto">
           <div className="flex flex-wrap -m-4">
             {products.data.map((item) => {
               return (
-                <div key={item.id} className="lg:w-1/4 md:w-1/2 p-4 w-full">
+                <div key={item.id} className="lg:w-1/3 md:w-1/2 p-4 w-full">
                   <Link
-                    href="/product"
+                    href={`/product/${item.attributes.slug}`}
                     className="block relative h-48 rounded overflow-hidden"
                   >
                     <ImageComponent
                       item={item.attributes.image.data.attributes.url}
+                      alt={"ecommerce"}
                     />
-                    {/* <img
-                      className="object-cover object-center w-full h-full block"
-                      src={item.attributes.image.data.attributes.url}
-                      alt="ecommerce"
-                    /> */}
                   </Link>
                   <div className="mt-4">
-                    <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
+                    <h3 className="text-white uppercase text-xs tracking-widest title-font mb-1">
                       {item.attributes.category}
                     </h3>
-                    <h2 className="text-white title-font text-lg font-medium">
-                      {item.attributes.title}
-                    </h2>
-                    <p className="mt-1">{item.attributes.price}$</p>
+                    <Link href={`/product/${item.attributes.slug}`}>
+                      <h2 className="text-white title-font text-lg font-medium">
+                        {item.attributes.title}
+                      </h2>
+                    </Link>
+                    <p className="text-white mt-1">{item.attributes.price}$</p>
                   </div>
                 </div>
               );
