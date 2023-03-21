@@ -1,36 +1,32 @@
 import React from "react";
 import axios from "axios";
 import Link from "next/link";
-import ImageComponent from "@/components/navbar/image/Image";
 
 const Products = ({ products }) => {
   return (
-    <div className="container mx-auto px-5">
-      <section className="text-gray-400 bg-green-900 body-font mb-5">
-        <div className="container px-5 py-5 mx-auto">
-          <div className="flex flex-wrap -m-4">
+    <div classNameNameName="container mx-auto px-5 pt-44 md:pt-24">
+      <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+          <div class="flex flex-wrap -m-4">
             {products.data.map((item) => {
               return (
-                <div key={item.id} className="lg:w-1/3 md:w-1/2 p-4 w-full">
-                  <Link
-                    href={`/product/${item.attributes.slug}`}
-                    className="block relative h-48 rounded overflow-hidden"
-                  >
-                    <ImageComponent
-                      item={item.attributes.image.data.attributes.url}
-                      alt={"ecommerce"}
+                <div key={item.id} class="xl:w-1/4 md:w-1/2 p-4">
+                  <div class="bg-gray-100 p-6 rounded-lg">
+                    <img
+                      class="h-40 rounded w-full object-cover object-center mb-6"
+                      src={`http://127.0.0.1:1337${item.attributes.image.data.attributes.url}`}
+                      alt="content"
                     />
-                  </Link>
-                  <div className="mt-4">
-                    <h3 className="text-white uppercase text-xs tracking-widest title-font mb-1">
-                      {item.attributes.category}
+                    <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">
+                      SUBTITLE
                     </h3>
-                    <Link href={`/product/${item.attributes.slug}`}>
-                      <h2 className="text-white title-font text-lg font-medium">
-                        {item.attributes.title}
-                      </h2>
-                    </Link>
-                    <p className="text-white mt-1">{item.attributes.price}$</p>
+                    <h2 class="text-lg text-gray-900 font-medium title-font mb-4">
+                      Chichen Itza
+                    </h2>
+                    <p class="leading-relaxed text-base">
+                      Fingerstache flexitarian street art 8-bit waistcoat.
+                      Distillery hexagon disrupt edison bulbche.
+                    </p>
                   </div>
                 </div>
               );
@@ -39,10 +35,74 @@ const Products = ({ products }) => {
         </div>
       </section>
     </div>
+
+    // <div classNameNameName="container mx-auto px-5 pt-44 md:pt-24">
+    //   <section classNameNameName="text-gray-400 bg-green-600 body-font mb-5">
+    //     <div classNameNameName="container px-5 py-5 mx-auto">
+    //       <div classNameNameName="flex flex-wrap -m-4">
+    //         {products.data.map((item) => {
+    //           return (
+    //             <div key={item.id} classNameNameName="lg:w-1/3 md:w-1/2 p-4 w-full">
+    //               <div classNameNameName="relative">
+    //                 <Link
+    //                   href={`/product/${item.attributes.slug}`}
+    //                   classNameNameName="block relative h-48 rounded overflow-hidden"
+    //                 >
+    //                   <img
+    //                     alt="ecommerce"
+    //                     classNameNameName="object-cover object-center w-full h-full block"
+    //                     src="https://dummyimage.com/421x261"
+    //                   />
+    //                 </Link>
+    //                 <div classNameNameName="mt-4 absolute">
+    //                   <h3 classNameNameName="text-white uppercase text-xs tracking-widest title-font mb-1">
+    //                     {item.attributes.category}
+    //                   </h3>
+    //                   <Link href={`/product/${item.attributes.slug}`}>
+    //                     <h2 classNameNameName="text-white title-font text-lg font-medium">
+    //                       {item.attributes.title}
+    //                     </h2>
+    //                   </Link>
+    //                   <p classNameNameName="text-white mt-1">
+    //                     {item.attributes.price}$
+    //                   </p>
+    //                 </div>
+    //               </div>
+    //             </div>
+    //           );
+    //         })}
+    //         {/* {products.data.map((item) => {
+    //           return (
+    //             <div key={item.id} classNameNameName="lg:w-1/3 md:w-1/2 p-4 w-full">
+    //               <Link href={`/product/${item.attributes.slug}`}>
+    //                 <div classNameNameName="relative">
+    //                   <img
+    //                     alt="ecommerce"
+    //                     classNameNameName="object-cover object-center w-full h-full block"
+    //                     src="https://dummyimage.com/421x261"
+    //                   />
+    //                   <div classNameNameName="overlay absolute inset-0 flex flex-col items-center justify-center text-white bg-black bg-opacity-50">
+    //                     <h3 classNameNameName="text-xs tracking-widest title-font mb-1">
+    //                       {item.attributes.category}
+    //                     </h3>
+    //                     <h2 classNameNameName="text-lg font-medium">
+    //                       {item.attributes.title}
+    //                     </h2>
+    //                   </div>
+    //                 </div>
+    //               </Link>
+    //               <p classNameNameName="text-white mt-1">{item.attributes.price}$</p>
+    //             </div>
+    //           );
+    //         })} */}
+    //       </div>
+    //     </div>
+    //   </section>
+    // </div>
   );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
   try {
     const response = await axios.get(
       "http://127.0.0.1:1337/api/products?populate=*",
