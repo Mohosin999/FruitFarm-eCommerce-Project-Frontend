@@ -17,20 +17,14 @@ const Navbar = () => {
             <Link href="/" className="mr-5 text-white hover:text-gray-300">
               Home
             </Link>
-            <Link href="/about" className="mr-5 text-white hover:text-gray-300">
-              About
-            </Link>
             <Link
               href="/products"
               className="mr-5 text-white hover:text-gray-300"
             >
               Products
             </Link>
-            <Link
-              href="/contact"
-              className="mr-5 text-white hover:text-gray-300"
-            >
-              Contact Us
+            <Link href="/cart" className="mr-5 text-white hover:text-gray-300">
+              Cart(0)
             </Link>
           </nav>
           <button

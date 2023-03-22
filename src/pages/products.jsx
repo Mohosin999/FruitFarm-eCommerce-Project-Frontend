@@ -4,14 +4,14 @@ import Link from "next/link";
 
 const Products = ({ products }) => {
   return (
-    <div className="container mx-auto px-5 pt-24 md:pt-5">
+    <div className="container mx-auto px-5 pt-28 md:pt-10">
       <section className="text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto">
+        <div className="container px-5 pt-24 pb-12 mx-auto">
           <div className="flex flex-wrap -m-4">
             {products.data.map((item) => {
               return (
                 <div key={item.id} className="xl:w-1/4 md:w-1/2 w-full p-2">
-                  <div className="bg-gray-100 p-6 rounded-lg">
+                  <div className="bg-gray-800 p-6 rounded-lg">
                     <Link href={`/product/${item.attributes.slug}`}>
                       <img
                         className="h-40 rounded w-full object-cover object-center mb-6"
@@ -19,13 +19,18 @@ const Products = ({ products }) => {
                         alt="content"
                       />
                     </Link>
-                    <h3 className="tracking-widest uppercase text-indigo-500 text-xs font-medium title-font">
+
+                    <h3 className="tracking-widest uppercase text-gray-400 text-xs font-medium title-font">
                       {item.attributes.category}
                     </h3>
-                    <h2 className="text-lg text-gray-900 font-medium title-font mb-4">
-                      {item.attributes.title}
-                    </h2>
-                    <h2 className="leading-relaxed text-base">
+
+                    <Link href={`/product/${item.attributes.slug}`}>
+                      <h2 className="text-lg text-gray-300 font-medium title-font mb-0">
+                        {item.attributes.title}
+                      </h2>
+                    </Link>
+
+                    <h2 className="text-gray-400 leading-relaxed text-base">
                       {item.attributes.price}$
                     </h2>
                   </div>
@@ -36,70 +41,6 @@ const Products = ({ products }) => {
         </div>
       </section>
     </div>
-
-    // <div classNameNameName="container mx-auto px-5 pt-44 md:pt-24">
-    //   <section classNameNameName="text-gray-400 bg-green-600 body-font mb-5">
-    //     <div classNameNameName="container px-5 py-5 mx-auto">
-    //       <div classNameNameName="flex flex-wrap -m-4">
-    //         {products.data.map((item) => {
-    //           return (
-    //             <div key={item.id} classNameNameName="lg:w-1/3 md:w-1/2 p-4 w-full">
-    //               <div classNameNameName="relative">
-    //                 <Link
-    //                   href={`/product/${item.attributes.slug}`}
-    //                   classNameNameName="block relative h-48 rounded overflow-hidden"
-    //                 >
-    //                   <img
-    //                     alt="ecommerce"
-    //                     classNameNameName="object-cover object-center w-full h-full block"
-    //                     src="https://dummyimage.com/421x261"
-    //                   />
-    //                 </Link>
-    //                 <div classNameNameName="mt-4 absolute">
-    //                   <h3 classNameNameName="text-white uppercase text-xs tracking-widest title-font mb-1">
-    //                     {item.attributes.category}
-    //                   </h3>
-    //                   <Link href={`/product/${item.attributes.slug}`}>
-    //                     <h2 classNameNameName="text-white title-font text-lg font-medium">
-    //                       {item.attributes.title}
-    //                     </h2>
-    //                   </Link>
-    //                   <p classNameNameName="text-white mt-1">
-    //                     {item.attributes.price}$
-    //                   </p>
-    //                 </div>
-    //               </div>
-    //             </div>
-    //           );
-    //         })}
-    //         {/* {products.data.map((item) => {
-    //           return (
-    //             <div key={item.id} classNameNameName="lg:w-1/3 md:w-1/2 p-4 w-full">
-    //               <Link href={`/product/${item.attributes.slug}`}>
-    //                 <div classNameNameName="relative">
-    //                   <img
-    //                     alt="ecommerce"
-    //                     classNameNameName="object-cover object-center w-full h-full block"
-    //                     src="https://dummyimage.com/421x261"
-    //                   />
-    //                   <div classNameNameName="overlay absolute inset-0 flex flex-col items-center justify-center text-white bg-black bg-opacity-50">
-    //                     <h3 classNameNameName="text-xs tracking-widest title-font mb-1">
-    //                       {item.attributes.category}
-    //                     </h3>
-    //                     <h2 classNameNameName="text-lg font-medium">
-    //                       {item.attributes.title}
-    //                     </h2>
-    //                   </div>
-    //                 </div>
-    //               </Link>
-    //               <p classNameNameName="text-white mt-1">{item.attributes.price}$</p>
-    //             </div>
-    //           );
-    //         })} */}
-    //       </div>
-    //     </div>
-    //   </section>
-    // </div>
   );
 };
 

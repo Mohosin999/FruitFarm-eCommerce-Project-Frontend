@@ -7,109 +7,49 @@ const Product = ({ product }) => {
   const { slug } = router.query;
 
   return (
-    <div className="container mx-auto px-5 pt-48 md:pt-28">
+    <div className="container mx-auto px-5 pt-48 md:pt-28 pb-5">
       <section className="text-gray-600 body-font overflow-hidden">
         <div className="container px-5 py-5 mx-auto">
           {product.attributes.image.data && (
             <div className="lg:w-4/5 md:w-4/5 mx-auto lg:flex lg:flexWrap">
               <img
                 alt="ecommerce"
-                className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
+                className="lg:w-1/2 w-full lg:h-auto md:h-64 object-cover object-center rounded"
                 src={`http://127.0.0.1:1337${product.attributes.image.data.attributes.url}`}
               />
 
               <div className="lg:w-1/2 md:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-                <h2 className="text-sm  title-font text-gray-500 trackingWidest">
+                <h2 className="text-sm  title-font text-gray-400 trackingWidest">
                   FruitFarm
                 </h2>
-                <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
+                <h1 className="text-gray-300 text-3xl title-font font-medium mb-1">
                   {product.attributes.title}
                 </h1>
-                <div className="flex mb-4">
-                  <span className="flex items-center">
-                    <svg
-                      fill="currentColor"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-4 h-4 text-red-500"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                    </svg>
-                    <svg
-                      fill="currentColor"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-4 h-4 text-red-500"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                    </svg>
-                    <svg
-                      fill="currentColor"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-4 h-4 text-red-500"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                    </svg>
-                    <svg
-                      fill="currentColor"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-4 h-4 text-red-500"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                    </svg>
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-4 h-4 text-red-500"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                    </svg>
-                    <span className="text-gray-600 ml-3">4 Reviews</span>
-                  </span>
-                </div>
 
                 <div className="my-6">
-                  <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
+                  <h1 className="text-gray-300 text-3xl title-font font-medium mb-1">
                     Description
                   </h1>
-                  <p className="leading-relaxed">
+                  <p className="text-gray-400 leading-relaxed">
                     {product.attributes.description}
                   </p>
                 </div>
 
                 <div className="flex flex-col">
                   <div>
-                    <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
+                    <h1 className="text-gray-300 text-3xl title-font font-medium mb-1">
                       Price
                     </h1>
                   </div>
                   <div className="flex flex-row">
-                    <span className="md:mt-2 title-font font-medium text-xl text-gray-600">
+                    <span className="md:mt-2 title-font font-medium text-xl text-gray-400">
                       {product.attributes.price}$
                     </span>
-                    <div className="md:ml-10 ml-2 flex flex-row">
-                      <button className="mr-2 text-white bg-red-500 border-0 py-1 md:py-1 lg:py-2 px-2 md:px-2 lg:px-4 focus:outline-none hover:bg-red-600 rounded">
+                    <div className="pl-4 md:pl-7 lg:pl-16 flex flex-row">
+                      <button className="mr-2 text-white bg-red-500 border-0 py-1 md:py-1 lg:py-2 px-2 md:px-2 lg:px-4 text-sm md:text-lg focus:outline-none hover:bg-red-600 rounded">
                         Add to Cart
                       </button>
-                      <button className="text-white bg-red-500 border-0 py-1 md:py-2 px-2 md:px-4 focus:outline-none hover:bg-red-600 rounded">
+                      <button className="text-white bg-red-500 border-0 py-1 md:py-2 px-2 md:px-4 text-sm md:text-lg focus:outline-none hover:bg-red-600 rounded">
                         Checkout
                       </button>
                     </div>
