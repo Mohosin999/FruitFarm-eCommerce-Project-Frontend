@@ -7,8 +7,8 @@ const Product = ({ product }) => {
   const { slug } = router.query;
 
   return (
-    <div className="container mx-auto px-5 pt-44 md:pt-24">
-      <section className="text-gray-600 bg-green-400 body-font overflow-hidden">
+    <div className="container mx-auto px-5 pt-48 md:pt-28">
+      <section className="text-gray-600 body-font overflow-hidden">
         <div className="container px-5 py-5 mx-auto">
           {product.attributes.image.data && (
             <div className="lg:w-4/5 md:w-4/5 mx-auto lg:flex lg:flexWrap">

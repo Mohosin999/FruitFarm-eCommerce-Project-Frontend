@@ -5,7 +5,9 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Navbar />
-      <Component {...pageProps} />
+      <div className="bg-green-400 bg-cover bg-center">
+        <Component {...pageProps} />
+      </div>
     </>
   );
 }

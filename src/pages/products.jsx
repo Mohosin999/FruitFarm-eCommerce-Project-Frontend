@@ -4,29 +4,30 @@ import Link from "next/link";
 
 const Products = ({ products }) => {
   return (
-    <div classNameNameName="container mx-auto px-5 pt-44 md:pt-24">
-      <section class="text-gray-600 body-font">
-        <div class="container px-5 py-24 mx-auto">
-          <div class="flex flex-wrap -m-4">
+    <div className="container mx-auto px-5 pt-24 md:pt-5">
+      <section className="text-gray-600 body-font">
+        <div className="container px-5 py-24 mx-auto">
+          <div className="flex flex-wrap -m-4">
             {products.data.map((item) => {
               return (
-                <div key={item.id} class="xl:w-1/4 md:w-1/2 p-4">
-                  <div class="bg-gray-100 p-6 rounded-lg">
-                    <img
-                      class="h-40 rounded w-full object-cover object-center mb-6"
-                      src={`http://127.0.0.1:1337${item.attributes.image.data.attributes.url}`}
-                      alt="content"
-                    />
-                    <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">
-                      SUBTITLE
+                <div key={item.id} className="xl:w-1/4 md:w-1/2 w-full p-2">
+                  <div className="bg-gray-100 p-6 rounded-lg">
+                    <Link href={`/product/${item.attributes.slug}`}>
+                      <img
+                        className="h-40 rounded w-full object-cover object-center mb-6"
+                        src={`http://127.0.0.1:1337${item.attributes.image.data.attributes.url}`}
+                        alt="content"
+                      />
+                    </Link>
+                    <h3 className="tracking-widest uppercase text-indigo-500 text-xs font-medium title-font">
+                      {item.attributes.category}
                     </h3>
-                    <h2 class="text-lg text-gray-900 font-medium title-font mb-4">
-                      Chichen Itza
+                    <h2 className="text-lg text-gray-900 font-medium title-font mb-4">
+                      {item.attributes.title}
                     </h2>
-                    <p class="leading-relaxed text-base">
-                      Fingerstache flexitarian street art 8-bit waistcoat.
-                      Distillery hexagon disrupt edison bulbche.
-                    </p>
+                    <h2 className="leading-relaxed text-base">
+                      {item.attributes.price}$
+                    </h2>
                   </div>
                 </div>
               );
