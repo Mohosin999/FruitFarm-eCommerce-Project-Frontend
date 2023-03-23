@@ -1,7 +1,10 @@
 import React from "react";
+import { useStoreState } from "easy-peasy";
 import Link from "next/link";
 
 const Navbar = () => {
+  const items = useStoreState((state) => state.carts);
+
   return (
     <div>
       <header className="text-gray-600 body-font fixed w-full z-50 bg-yellow-900">
@@ -24,7 +27,7 @@ const Navbar = () => {
               Products
             </Link>
             <Link href="/cart" className="mr-5 text-white hover:text-gray-300">
-              Cart(0)
+              Cart({items.items.length})
             </Link>
           </nav>
           <button
