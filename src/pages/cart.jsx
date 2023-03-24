@@ -1,212 +1,107 @@
-import React from "react";
+import React, { useState } from "react";
+import { useStoreState, useStoreActions } from "easy-peasy";
 
 const CartPage = () => {
+  const [selectedProducts, setSelectedProducts] = useState([]);
+
+  const products = useStoreState((state) => state.carts.items);
+  console.log(products);
+  const { removeFromCart, clearAllCart } = useStoreActions(
+    (actions) => actions.carts
+  );
+
+  const handleDelete = (id) => {
+    removeFromCart(id);
+    setSelectedProducts([]);
+  };
+
+  const handleCheckboxChange = (e, id) => {
+    console.log(`access inside json string ${id}`);
+    if (e.target.checked) {
+      setSelectedProducts(id);
+    }
+  };
+
   return (
     <div>
-      <section class="text-gray-600 body-font">
-        <div class="container px-5 pb-10 md:pb-16 pt-52 md:pt-32 mx-auto">
-          <div class="flex flex-col text-center w-full mb-5">
-            <p class="text-md md:text-xl font-medium title-font mb-2 text-gray-100">
+      <section className="text-gray-600 body-font">
+        <div className="container px-5 pb-10 md:pb-16 pt-52 md:pt-32 mx-auto">
+          <div className="flex flex-col text-center w-full mb-5">
+            <p className="text-md md:text-xl font-medium title-font mb-2 text-gray-100">
               All Your Choosing Product Here
             </p>
           </div>
-          <div class="lg:w-2/3 w-full mx-auto overflow-auto">
-            <table class="table-auto w-full text-left whitespace-no-wrap">
+          <div className="lg:w-2/3 w-full mx-auto overflow-auto">
+            <table className="table-auto w-full text-left whitespace-no-wrap">
               <thead>
                 <tr>
-                  <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
+                  <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
                     Product Name
                   </th>
-                  <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                  <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                     Quantity
                   </th>
-                  <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                    Handle Quantity
-                  </th>
-                  <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                  <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                     Price
                   </th>
-                  <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
+                  <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                    Total Price
+                  </th>
+                  <th className="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="px-4 py-3">Start</td>
-                  <td class="px-4 py-3">5 Mb/s</td>
-                  <td class="px-4 py-3">15 GB</td>
-                  <td class="px-4 py-3 text-lg text-gray-900">Free</td>
-                  <td class="w-10 text-center">
-                    <input name="plan" type="radio" />
-                  </td>
-                </tr>
-                <tr>
-                  <td class="border-t-2 border-gray-200 px-4 py-3">Pro</td>
-                  <td class="border-t-2 border-gray-200 px-4 py-3">25 Mb/s</td>
-                  <td class="border-t-2 border-gray-200 px-4 py-3">25 GB</td>
-                  <td class="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-                    $24
-                  </td>
-                  <td class="border-t-2 border-gray-200 w-10 text-center">
-                    <input name="plan" type="radio" />
-                  </td>
-                </tr>
-                <tr>
-                  <td class="border-t-2 border-gray-200 px-4 py-3">Business</td>
-                  <td class="border-t-2 border-gray-200 px-4 py-3">36 Mb/s</td>
-                  <td class="border-t-2 border-gray-200 px-4 py-3">40 GB</td>
-                  <td class="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-                    $50
-                  </td>
-                  <td class="border-t-2 border-gray-200 w-10 text-center">
-                    <input name="plan" type="radio" />
-                  </td>
-                </tr>
-                <tr>
-                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">
-                    Exclusive
-                  </td>
-                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">
-                    48 Mb/s
-                  </td>
-                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">
-                    120 GB
-                  </td>
-                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-                    $72
-                  </td>
-                  <td class="border-t-2 border-b-2 border-gray-200 w-10 text-center">
-                    <input name="plan" type="radio" />
-                  </td>
-                </tr>
+                {products.map((product) => {
+                  // const productObj = JSON.parse(product);
+
+                  return (
+                    <tr key={product.id}>
+                      <td className="border-t-2 border-gray-200 px-4 py-3 text-gray-100">
+                        {product.attributes.title}
+                      </td>
+                      <td className="border-t-2 border-gray-200 px-4 py-3 text-gray-100">
+                        {product.attributes.quantity}
+                      </td>
+                      <td className="border-t-2 border-gray-200 px-4 py-3 text-gray-100">
+                        {product.attributes.price}$
+                      </td>
+                      <td className="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-100">
+                        00$
+                      </td>
+                      <td className="border-t-2 border-gray-200 w-10 text-center">
+                        <input
+                          name="plan"
+                          type="checkbox"
+                          onChange={(e) => {
+                            handleCheckboxChange(e, product.id);
+                          }}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
-          <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
-            <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
-              Learn More
-              <svg
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                class="w-4 h-4 ml-2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-              </svg>
-            </a>
-            <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-              Button
+
+          {/* Clear & Delete Buttons */}
+          <div className="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
+            <button
+              onClick={() => clearAllCart()}
+              className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
+            >
+              Clear
+            </button>
+
+            <button
+              onClick={() => handleDelete(selectedProducts)}
+              className="flex ml-3 text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
+            >
+              Delete
             </button>
           </div>
         </div>
       </section>
-
-      {/* <section class="text-gray-600 body-font">
-        <div class="container px-5 py-24 mx-auto">
-          <div class="flex flex-col text-center w-full mb-20">
-            <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">
-              Pricing
-            </h1>
-            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
-              Banh mi cornhole echo park skateboard authentic crucifix neutra
-              tilde lyft biodiesel artisan direct trade mumblecore 3 wolf moon
-              twee
-            </p>
-          </div>
-          <div class="lg:w-2/3 w-full mx-auto overflow-auto">
-            <table class="table-auto w-full text-left whitespace-no-wrap">
-              <thead>
-                <tr>
-                  <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
-                    Plan
-                  </th>
-                  <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                    Speed
-                  </th>
-                  <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                    Storage
-                  </th>
-                  <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                    Price
-                  </th>
-                  <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="px-4 py-3">Start</td>
-                  <td class="px-4 py-3">5 Mb/s</td>
-                  <td class="px-4 py-3">15 GB</td>
-                  <td class="px-4 py-3 text-lg text-gray-900">Free</td>
-                  <td class="w-10 text-center">
-                    <input name="plan" type="radio" />
-                  </td>
-                </tr>
-                <tr>
-                  <td class="border-t-2 border-gray-200 px-4 py-3">Pro</td>
-                  <td class="border-t-2 border-gray-200 px-4 py-3">25 Mb/s</td>
-                  <td class="border-t-2 border-gray-200 px-4 py-3">25 GB</td>
-                  <td class="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-                    $24
-                  </td>
-                  <td class="border-t-2 border-gray-200 w-10 text-center">
-                    <input name="plan" type="radio" />
-                  </td>
-                </tr>
-                <tr>
-                  <td class="border-t-2 border-gray-200 px-4 py-3">Business</td>
-                  <td class="border-t-2 border-gray-200 px-4 py-3">36 Mb/s</td>
-                  <td class="border-t-2 border-gray-200 px-4 py-3">40 GB</td>
-                  <td class="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-                    $50
-                  </td>
-                  <td class="border-t-2 border-gray-200 w-10 text-center">
-                    <input name="plan" type="radio" />
-                  </td>
-                </tr>
-                <tr>
-                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">
-                    Exclusive
-                  </td>
-                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">
-                    48 Mb/s
-                  </td>
-                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">
-                    120 GB
-                  </td>
-                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-                    $72
-                  </td>
-                  <td class="border-t-2 border-b-2 border-gray-200 w-10 text-center">
-                    <input name="plan" type="radio" />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
-            <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
-              Learn More
-              <svg
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                class="w-4 h-4 ml-2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-              </svg>
-            </a>
-            <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-              Button
-            </button>
-          </div>
-        </div>
-      </section> */}
     </div>
   );
 };

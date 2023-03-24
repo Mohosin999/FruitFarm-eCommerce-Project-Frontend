@@ -49,16 +49,15 @@ const Product = ({ product }) => {
                     </span>
                     <div className="pl-4 md:pl-7 lg:pl-16 flex flex-row">
                       <button
-                        onClick={() =>
-                          cart.addToCart(
-                            JSON.stringify(product.attributes.title)
-                          )
-                        }
+                        onClick={() => cart.addToCart(product)}
                         className="mr-2 text-white bg-red-500 border-0 py-1 md:py-1 lg:py-2 px-2 md:px-2 lg:px-4 text-sm md:text-lg focus:outline-none hover:bg-red-600 rounded"
                       >
                         Add to Cart
                       </button>
-                      <button className="text-white bg-red-500 border-0 py-1 md:py-2 px-2 md:px-4 text-sm md:text-lg focus:outline-none hover:bg-red-600 rounded">
+                      <button
+                        onClick={() => router.push("/cart")}
+                        className="text-white bg-red-500 border-0 py-1 md:py-2 px-2 md:px-4 text-sm md:text-lg focus:outline-none hover:bg-red-600 rounded"
+                      >
                         Checkout
                       </button>
                     </div>
