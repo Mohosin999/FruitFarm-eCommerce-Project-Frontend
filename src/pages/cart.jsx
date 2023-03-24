@@ -8,8 +8,9 @@ const CartPage = () => {
   // Here I use router to go back and I use it inside "Go Back" button
   const router = useRouter();
 
+  // Those things comes from store
   const products = useStoreState((state) => state.carts.items);
-  const { removeFromCart, clearAllCart } = useStoreActions(
+  const { removeFromCart, clearAllCart, incrementItem } = useStoreActions(
     (actions) => actions.carts
   );
 
@@ -44,10 +45,10 @@ const CartPage = () => {
                     Quantity
                   </th>
                   <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                    Price
+                    Handle Quantity
                   </th>
                   <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                    Total Price
+                    Price
                   </th>
                   <th className="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
                 </tr>
@@ -63,10 +64,25 @@ const CartPage = () => {
                         {product.attributes.quantity}
                       </td>
                       <td className="border-t-2 border-gray-200 px-4 py-3 text-gray-100">
-                        {product.attributes.price}$
+                        <div>
+                          <button
+                            onClick={() => {
+                              product.attributes.quantity -= 1;
+                            }}
+                            className="mr-2 bg-green-800 hover:bg-orange-700 text-gray-100 px-3"
+                          >
+                            -
+                          </button>
+                          <button
+                            onClick={() => incrementItem(product.id)}
+                            className="bg-green-800 hover:bg-orange-700 text-gray-100 px-3"
+                          >
+                            +
+                          </button>
+                        </div>
                       </td>
                       <td className="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-100">
-                        00$
+                        {product.attributes.price}$
                       </td>
                       <td className="border-t-2 border-gray-200 w-10 text-center">
                         <input

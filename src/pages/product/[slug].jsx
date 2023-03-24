@@ -5,8 +5,7 @@ import { useRouter } from "next/router";
 
 const Product = ({ product }) => {
   const router = useRouter();
-  // const { slug } = router.query;
-  const cart = useStoreActions((actions) => actions.carts);
+  const addToCart = useStoreActions((actions) => actions.carts.addToCart);
 
   return (
     <div className="container mx-auto px-5 pt-48 md:pt-28 pb-5">
@@ -47,9 +46,11 @@ const Product = ({ product }) => {
                     <span className="md:mt-2 title-font font-medium text-xl text-gray-400">
                       {product.attributes.price}$
                     </span>
+
+                    {/* Handle Buttons */}
                     <div className="pl-4 md:pl-7 lg:pl-16 flex flex-row">
                       <button
-                        onClick={() => cart.addToCart(product)}
+                        onClick={() => addToCart(product)}
                         className="mr-2 text-white bg-red-500 border-0 py-1 md:py-1 lg:py-2 px-2 md:px-2 lg:px-4 text-sm md:text-lg focus:outline-none hover:bg-red-600 rounded"
                       >
                         Add to Cart
@@ -62,6 +63,16 @@ const Product = ({ product }) => {
                       </button>
                     </div>
                   </div>
+                </div>
+
+                {/* Go Back Button */}
+                <div className="mt-4">
+                  <button
+                    onClick={() => router.back()}
+                    className="ml-2 text-white bg-green-800 border-0 py-1 md:py-2 px-2 md:px-4 text-sm md:text-lg focus:outline-none hover:bg-green-900 rounded"
+                  >
+                    Go Back
+                  </button>
                 </div>
               </div>
             </div>
