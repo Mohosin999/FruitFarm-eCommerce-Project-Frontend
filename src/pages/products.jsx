@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Products = ({ products }) => {
   return (
-    <div className="container mx-auto px-5 pt-28 md:pt-10">
+    <div className="container mx-auto px-5 pt-28 md:pt-10 flex flex-col min-h-screen">
       <section className="text-gray-600 body-font">
         <div className="container px-5 pt-24 pb-12 mx-auto">
           <div className="flex flex-wrap -m-4">

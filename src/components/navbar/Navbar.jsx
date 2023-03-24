@@ -29,14 +29,13 @@ const Navbar = () => {
             <Link href="/cart" className="mr-5 text-white hover:text-gray-300">
               Cart({items.items.length})
             </Link>
+            <Link href="/cart" className="mr-5 text-white hover:text-gray-300">
+              Login
+            </Link>
+            <Link href="/cart" className="mr-5 text-white hover:text-gray-300">
+              Register
+            </Link>
           </nav>
-          <button
-            className="my-2 text-white bg-indigo-500 border-0 py-1 md:py-2 px-2 md:px-4
-            focus:outline-none hover:bg-indigo-600 rounded text-sm"
-          >
-            {" "}
-            Login
-          </button>
         </div>
       </header>
     </div>
