@@ -128,7 +128,8 @@ const CartPage = () => {
           <div className="flex flex-col items-center justify-center ml-auto mt-10 w-full">
             <div className="mb-2">
               <h1 className="text-md md:text-xl font-medium title-font text-gray-100">
-                Grand Total: {grandTotal}$
+                Grand Total:{" "}
+                <span className="text-gray-400">{grandTotal}$</span>
               </h1>
             </div>
             <div>
