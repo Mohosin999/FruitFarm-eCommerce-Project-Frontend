@@ -19,11 +19,7 @@ const Product = ({ product }) => {
                 className="lg:w-1/2 w-full lg:h-auto md:h-64 object-cover object-center rounded"
                 src={`http://127.0.0.1:1337${product.attributes.image.data.attributes.url}`}
               />
-
               <div className="lg:w-1/2 md:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-                {/* <h2 className="text-md  title-font text-gray-400 trackingWidest">
-                  FruitFarm
-                </h2> */}
                 <div className="flex items-center">
                   <div className="text-sm title-font text-gray-400 trackingWidest hover:text-gray-500">
                     <Link href="/" className="inline-block">
@@ -32,9 +28,12 @@ const Product = ({ product }) => {
                   </div>
                   <div className="ml-2 text-sm text-gray-400">/</div>
                   <div className="ml-2 text-sm title-font text-gray-400 trackingWidest hover:text-gray-500">
-                    <Link href="/products" className="inline-block">
+                    <button
+                      onClick={() => router.back()}
+                      className="inline-block"
+                    >
                       Go Back
-                    </Link>
+                    </button>
                   </div>
                 </div>
 
