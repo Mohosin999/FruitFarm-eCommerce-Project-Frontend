@@ -1,9 +1,6 @@
 import React from "react";
-import { useRouter } from "next/router";
 
 const Contact = () => {
-  const router = useRouter();
-
   return (
     <div className="container mx-auto px-5 pt-24 flex flex-col min-h-screen">
       <section className="text-gray-100 body-font relative">
@@ -68,14 +65,6 @@ const Contact = () => {
                 <div className="mb-2">
                   <button className="text-gray-100 bg-indigo-500 border-0 py-1 md:py-1 lg:py-2 px-8 md:px-10 lg:px-10 text-sm md:text-lg focus:outline-none hover:bg-indigo-600 rounded">
                     Submit
-                  </button>
-                </div>
-                <div>
-                  <button
-                    onClick={() => router.back()}
-                    className="text-gray-100 bg-indigo-500 border-0 py-1 md:py-1 lg:py-2 px-8 md:px-10 lg:px-10 text-sm md:text-lg focus:outline-none hover:bg-indigo-600 rounded"
-                  >
-                    Go Back
                   </button>
                 </div>
               </div>
