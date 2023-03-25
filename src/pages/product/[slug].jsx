@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useStoreActions } from "easy-peasy";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Product = ({ product }) => {
   const router = useRouter();
@@ -20,9 +21,23 @@ const Product = ({ product }) => {
               />
 
               <div className="lg:w-1/2 md:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-                <h2 className="text-sm  title-font text-gray-400 trackingWidest">
+                {/* <h2 className="text-md  title-font text-gray-400 trackingWidest">
                   FruitFarm
-                </h2>
+                </h2> */}
+                <div className="flex items-center">
+                  <div className="text-sm title-font text-gray-400 trackingWidest hover:text-gray-500">
+                    <Link href="/" className="inline-block">
+                      FruitFarm
+                    </Link>
+                  </div>
+                  <div className="ml-2 text-sm text-gray-400">/</div>
+                  <div className="ml-2 text-sm title-font text-gray-400 trackingWidest hover:text-gray-500">
+                    <Link href="/products" className="inline-block">
+                      Go Back
+                    </Link>
+                  </div>
+                </div>
+
                 <h1 className="text-gray-300 text-3xl title-font font-medium mb-1">
                   {product.attributes.title}
                 </h1>
@@ -63,16 +78,6 @@ const Product = ({ product }) => {
                       </button>
                     </div>
                   </div>
-                </div>
-
-                {/* Go Back Button */}
-                <div className="mt-4">
-                  <button
-                    onClick={() => router.back()}
-                    className="ml-2 text-white bg-green-800 border-0 py-1 md:py-2 px-2 md:px-4 text-sm md:text-lg focus:outline-none hover:bg-green-900 rounded"
-                  >
-                    Go Back
-                  </button>
                 </div>
               </div>
             </div>
