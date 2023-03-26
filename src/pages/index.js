@@ -13,10 +13,10 @@ const Home = ({ allProducts, newestProducts, categoriesProducts }) => {
   return (
     <div className="container mx-auto px-5 pt-28 md:pt-10 flex flex-col min-h-screen">
       <section className="text-gray-600 body-font">
-        {/* Newest Products */}
+        {/* New Products */}
         <div className="container px-5 pt-24 pb-12 mx-auto">
           <h1 className="text-xl font-medium text-gray-300 mb-8">
-            Newest Products
+            New Products
           </h1>
           <div className="flex flex-wrap -m-4">
             {newestProducts.map((item) => {
@@ -137,6 +137,7 @@ const Home = ({ allProducts, newestProducts, categoriesProducts }) => {
 
 export async function getServerSideProps(context) {
   try {
+    // data fetching for all products
     const allResponse = await axios.get(
       "http://127.0.0.1:1337/api/products?populate=*",
       {
@@ -148,6 +149,7 @@ export async function getServerSideProps(context) {
     );
     const allProducts = allResponse.data;
 
+    // data fetching for new added products
     const recentResponse = await axios.get(
       "http://127.0.0.1:1337/api/products?populate=*",
       {
@@ -159,7 +161,8 @@ export async function getServerSideProps(context) {
     );
     const newestProducts = recentResponse.data;
 
-    const response = await axios.get(
+    // data fetching for all categories
+    const categoriesProducts = await axios.get(
       "http://127.0.0.1:1337/api/categories?populate=*",
       {
         headers: {
@@ -168,7 +171,7 @@ export async function getServerSideProps(context) {
         },
       }
     );
-    const product = response.data;
+    const product = categoriesProducts.data;
 
     return {
       props: {
