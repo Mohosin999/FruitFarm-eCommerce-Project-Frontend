@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Link from "next/link";
-// import Pagination from "@/components/pagination/Pagination";
+import Pagination from "@/components/pagination/Pagination";
 
 const Products = ({ products, category }) => {
   return (
@@ -42,87 +42,87 @@ const Products = ({ products, category }) => {
     //     </div>
     //   </section>
     // </div>
+    <>
+      // Category list
+      <div className="container mx-auto px-5 pt-28 md:pt-10 flex flex-col min-h-screen">
+        <div className="flex flex-wrap">
+          <div className="w-full md:w-1/4">
+            <div className="container px-5 pt-24 pb-12 mx-auto">
+              <ul className="text-gray-600 body-font">
+                <h1 className="tracking-widest uppercase text-gray-300 text-sm font-medium title-font mb-4">
+                  Category
+                </h1>
+                <li className="mb-2">
+                  <Link
+                    href={`/categories/${category[1].attributes.slug}`}
+                    className="text-gray-400 hover:text-gray-300"
+                  >
+                    Mango
+                  </Link>
+                </li>
+                <li className="mb-2">
+                  <Link
+                    href={`/categories/${category[0].attributes.slug}`}
+                    className="text-gray-400 hover:text-gray-300"
+                  >
+                    Apple
+                  </Link>
+                </li>
+                <li className="mb-2">
+                  <Link
+                    href={`/categories/${category[2].attributes.slug}`}
+                    className="text-gray-400 hover:text-gray-300"
+                  >
+                    Orange
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
 
-    // Category list
-    <div className="container mx-auto px-5 pt-28 md:pt-10 flex flex-col min-h-screen">
-      <div className="flex flex-wrap">
-        <div className="w-full md:w-1/4">
-          <div className="container px-5 pt-24 pb-12 mx-auto">
-            <ul className="text-gray-600 body-font">
-              <h1 className="tracking-widest uppercase text-gray-300 text-sm font-medium title-font mb-4">
-                Category
-              </h1>
-              <li className="mb-2">
-                <Link
-                  href={`/categories/${category[1].attributes.slug}`}
-                  className="text-gray-400 hover:text-gray-300"
-                >
-                  Mango
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link
-                  href={`/categories/${category[0].attributes.slug}`}
-                  className="text-gray-400 hover:text-gray-300"
-                >
-                  Apple
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link
-                  href={`/categories/${category[2].attributes.slug}`}
-                  className="text-gray-400 hover:text-gray-300"
-                >
-                  Orange
-                </Link>
-              </li>
-            </ul>
+          {/* Products list */}
+          <div className="w-full md:w-3/4">
+            <section className="text-gray-600 body-font">
+              <div className="container px-5 pt-24 pb-12 mx-auto">
+                <div className="flex flex-wrap -m-4">
+                  {products.data.map((item) => {
+                    return (
+                      <div key={item.id} className="w-full md:w-1/3 p-2">
+                        <div className="bg-gray-800 p-6 rounded-lg">
+                          <Link href={`/product/${item.attributes.slug}`}>
+                            <img
+                              className="h-40 rounded w-full object-cover object-center mb-6"
+                              src={`http://127.0.0.1:1337${item.attributes.image.data.attributes.url}`}
+                              alt="content"
+                            />
+                          </Link>
+
+                          <h3 className="tracking-widest uppercase text-gray-400 text-xs font-medium title-font">
+                            {item.attributes.category}
+                          </h3>
+
+                          <Link href={`/product/${item.attributes.slug}`}>
+                            <h2 className="text-lg text-gray-300 font-medium title-font mb-0">
+                              {item.attributes.title}
+                            </h2>
+                          </Link>
+
+                          <h2 className="text-gray-400 leading-relaxed text-base">
+                            {item.attributes.price}$
+                          </h2>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </section>
           </div>
         </div>
-
-        {/* Products list */}
-        <div className="w-full md:w-3/4">
-          <section className="text-gray-600 body-font">
-            <div className="container px-5 pt-24 pb-12 mx-auto">
-              <div className="flex flex-wrap -m-4">
-                {products.data.map((item) => {
-                  return (
-                    <div key={item.id} className="w-full md:w-1/3 p-2">
-                      <div className="bg-gray-800 p-6 rounded-lg">
-                        <Link href={`/product/${item.attributes.slug}`}>
-                          <img
-                            className="h-40 rounded w-full object-cover object-center mb-6"
-                            src={`http://127.0.0.1:1337${item.attributes.image.data.attributes.url}`}
-                            alt="content"
-                          />
-                        </Link>
-
-                        <h3 className="tracking-widest uppercase text-gray-400 text-xs font-medium title-font">
-                          {item.attributes.category}
-                        </h3>
-
-                        <Link href={`/product/${item.attributes.slug}`}>
-                          <h2 className="text-lg text-gray-300 font-medium title-font mb-0">
-                            {item.attributes.title}
-                          </h2>
-                        </Link>
-
-                        <h2 className="text-gray-400 leading-relaxed text-base">
-                          {item.attributes.price}$
-                        </h2>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-        </div>
-
-        {/* pagination component */}
-        {/* <Pagination /> */}
       </div>
-    </div>
+      {/* pagination component */}
+      <Pagination />
+    </>
   );
 };
 
