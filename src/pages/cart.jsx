@@ -16,14 +16,25 @@ const CartPage = () => {
   const { removeFromCart, clearAllCart, incrementCartItem, decrementCartItem } =
     useStoreActions((actions) => actions.carts);
 
-  const handleDelete = (id) => {
-    removeFromCart(id);
+  // const handleDelete = (id) => {
+  //   removeFromCart(id);
+  //   setSelectedProducts([]);
+  // };
+
+  const handleDelete = () => {
+    selectedProducts.forEach((id) => {
+      removeFromCart(id);
+    });
     setSelectedProducts([]);
   };
 
   const handleCheckboxChange = (e, id) => {
     if (e.target.checked) {
-      setSelectedProducts(id);
+      setSelectedProducts((prevIds) => [...prevIds, id]);
+    } else {
+      setSelectedProducts((prevIds) =>
+        prevIds.filter((prevId) => prevId !== id)
+      );
     }
   };
 
@@ -88,7 +99,7 @@ const CartPage = () => {
                       <td className="border-t-2 border-gray-200 w-10 text-center">
                         <input
                           name="plan"
-                          type="radio"
+                          type="checkbox"
                           onChange={(e) => {
                             handleCheckboxChange(e, product.id);
                           }}
@@ -117,7 +128,7 @@ const CartPage = () => {
             </button>
 
             <button
-              onClick={() => handleDelete(selectedProducts)}
+              onClick={handleDelete}
               className="flex ml-3 text-gray-100 bg-indigo-500 border-0 py-1 md:py-1 lg:py-2 px-2 md:px-2 lg:px-4 text-sm md:text-lg focus:outline-none hover:bg-indigo-600 rounded"
             >
               Delete
