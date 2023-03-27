@@ -1,51 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
-import Pagination from "@/components/pagination/Pagination";
+import useSWR from "swr";
+import fetcher from "../lib/api";
 
 const Products = ({ products, category }) => {
+  let [pageIndex, setPageIndex] = useState(1);
+
+  const { data } = useSWR(
+    `http://127.0.0.1:1337/api/products?pagination[page]=${pageIndex}&pagination[pageSize]=9&populate=*`,
+    fetcher,
+    { fallbackData: products }
+  );
+
   return (
-    // <div className="container mx-auto px-5 pt-28 md:pt-10 flex flex-col min-h-screen">
-    //   <section className="text-gray-600 body-font">
-    //     <div className="container px-5 pt-24 pb-12 mx-auto">
-    //       <div className="flex flex-wrap -m-4">
-    //         {products.data.map((item) => {
-    //           return (
-    //             <div key={item.id} className="xl:w-1/4 md:w-1/2 w-full p-2">
-    //               <div className="bg-gray-800 p-6 rounded-lg">
-    //                 <Link href={`/product/${item.attributes.slug}`}>
-    //                   <img
-    //                     className="h-40 rounded w-full object-cover object-center mb-6"
-    //                     src={`http://127.0.0.1:1337${item.attributes.image.data.attributes.url}`}
-    //                     alt="content"
-    //                   />
-    //                 </Link>
-
-    //                 <h3 className="tracking-widest uppercase text-gray-400 text-xs font-medium title-font">
-    //                   {item.attributes.category}
-    //                 </h3>
-
-    //                 <Link href={`/product/${item.attributes.slug}`}>
-    //                   <h2 className="text-lg text-gray-300 font-medium title-font mb-0">
-    //                     {item.attributes.title}
-    //                   </h2>
-    //                 </Link>
-
-    //                 <h2 className="text-gray-400 leading-relaxed text-base">
-    //                   {item.attributes.price}$
-    //                 </h2>
-    //               </div>
-    //             </div>
-    //           );
-    //         })}
-    //       </div>
-    //     </div>
-    //   </section>
-    // </div>
     <>
-      // Category list
       <div className="container mx-auto px-5 pt-28 md:pt-10 flex flex-col min-h-screen">
         <div className="flex flex-wrap">
+          {/* Category list */}
           <div className="w-full md:w-1/4">
             <div className="container px-5 pt-24 pb-12 mx-auto">
               <ul className="text-gray-600 body-font">
@@ -85,7 +57,7 @@ const Products = ({ products, category }) => {
             <section className="text-gray-600 body-font">
               <div className="container px-5 pt-24 pb-12 mx-auto">
                 <div className="flex flex-wrap -m-4">
-                  {products.data.map((item) => {
+                  {data.data.map((item) => {
                     return (
                       <div key={item.id} className="w-full md:w-1/3 p-2">
                         <div className="bg-gray-800 p-6 rounded-lg">
@@ -117,11 +89,43 @@ const Products = ({ products, category }) => {
                 </div>
               </div>
             </section>
+            {/* pagination component */}
+            <div className="space-x-2 space-y-2">
+              <button
+                disabled={pageIndex === 1}
+                className={`md:p-2 rounded text-black text-white p-2 ${
+                  pageIndex === 1 ? "bg-gray-300" : "bg-blue-400"
+                }`}
+                onClick={() => setPageIndex((prev) => prev - 1)}
+              >
+                Previous
+              </button>
+              <button
+                disabled={
+                  data &&
+                  data.meta &&
+                  data.meta.pagination &&
+                  pageIndex === data.meta.pagination.pageCount
+                }
+                className={`md:p-2 rounded text-black text-white p-2 ${
+                  pageIndex === data.meta.pagination.pageCount
+                    ? "bg-gray-300"
+                    : "bg-blue-400"
+                }`}
+                onClick={() => setPageIndex((prev) => prev + 1)}
+              >
+                Next
+              </button>
+              <span>{`${pageIndex} of ${
+                data &&
+                data.meta &&
+                data.meta.pagination &&
+                data.meta.pagination.pageCount
+              }`}</span>
+            </div>
           </div>
         </div>
       </div>
-      {/* pagination component */}
-      <Pagination />
     </>
   );
 };
@@ -130,7 +134,7 @@ export async function getServerSideProps(context) {
   try {
     // data fetching for all products
     const response = await axios.get(
-      "http://127.0.0.1:1337/api/products?populate=*",
+      "http://127.0.0.1:1337/api/products?pagination[page]=1&pagination[pageSize]=9&populate=*",
       {
         headers: {
           Authorization:
