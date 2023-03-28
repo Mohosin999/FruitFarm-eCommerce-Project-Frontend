@@ -4,6 +4,7 @@ import Link from "next/link";
 
 const Navbar = () => {
   const items = useStoreState((state) => state.carts);
+  const isAuthenticated = useStoreState((state) => state.auth.isAuthenticated);
 
   return (
     <div>
@@ -29,15 +30,30 @@ const Navbar = () => {
             <Link href="/cart" className="mr-5 text-white hover:text-gray-300">
               Cart({items.items.length})
             </Link>
-            <Link href="/login" className="mr-5 text-white hover:text-gray-300">
-              Login
-            </Link>
-            <Link
-              href="/register"
-              className="mr-5 text-white hover:text-gray-300"
-            >
-              Register
-            </Link>
+
+            {isAuthenticated ? (
+              <Link
+                href="/profile"
+                className="mr-5 text-white hover:text-gray-300"
+              >
+                Profile
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="mr-5 text-white hover:text-gray-300"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/register"
+                  className="mr-5 text-white hover:text-gray-300"
+                >
+                  Register
+                </Link>
+              </>
+            )}
           </nav>
         </div>
       </header>
